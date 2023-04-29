@@ -16,7 +16,7 @@ rl.question(
         console.log("Error getting directory info");
       }
       const jsonFiles = files.filter(
-        (file) => path.extname(file).toLocaleLowerCase() === ".json"
+        (file) => path.extname(file).toLowerCase() === ".json"
       );
       console.log("filllllles", jsonFiles);
     });
