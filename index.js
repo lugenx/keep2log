@@ -4,6 +4,7 @@ const readline = require("node:readline");
 const { stdin: input, stdout: output } = require("node:process");
 
 const rl = readline.createInterface({ input, output });
+const FILE_PATH = "/Users/elgun/desktop";
 
 rl.question(
   "\n\x1b[33m Enter the name of the folder that exported from Google Keep?\x1b[0m\n\n > ",
@@ -11,25 +12,27 @@ rl.question(
     console.log(`Answer is here: ${folderName}`);
 
     // TODO: Below will read directory and create array of json fles
-    fs.readdir(__dirname + `/${folderName}/Keep/`, (err, files) => {
-      if (err) {
-        console.log("Error getting directory info");
-      }
+    try {
+      const files = fs.readdirSync(`/${FILE_PATH}/${folderName}/Keep/`);
       const jsonFiles = files.filter(
         (file) => path.extname(file).toLowerCase() === ".json"
       );
-      console.log("filllllles", jsonFiles);
-    });
+      console.log("this runs firs - json files", jsonFiles);
+    } catch (error) {
+      console.log("Error getting directory info");
+    }
+
     // TODO: Iterate over all json files (jsonFiles) and handle each file and structure data
+    console.log("logic goes here");
+
     // TODO: Below will read the json file
-    fs.readFile("test-file.json", "utf-8", (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      const jsonData = JSON.parse(data);
-      console.log("jsonData here", jsonData);
-    });
+    try {
+      const fileContent = fs.readFileSync(`${FILE_PATH}/test-file.json`);
+      const jsonData = JSON.parse(fileContent);
+      console.log("this runs later - jsonData here", jsonData);
+    } catch (error) {
+      console.error(error);
+    }
 
     rl.close();
   }
