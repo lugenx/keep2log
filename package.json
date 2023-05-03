@@ -1,0 +1,14 @@
+{
+  "name": "keep2log",
+  "version": "1.0.0",
+  "bin": {
+    "keep2log": "index.js"
+  },
+  "description": "Single executable CLI tool to conver Google Keep notes to Logseq journal entries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
