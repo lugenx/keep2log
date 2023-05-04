@@ -16,18 +16,31 @@ const convertFile = (file) => {
 
   const mdFileName = `${year}_${month}_${day}.md`;
 
-  const title = file.title;
-  const text = file.textContent;
+  // TODO: Create assets directory and move actual attachments
+  const formatTitle = (title) => {
+    return title ? `**${title.trim()}**` : "";
+  };
 
-  const content = title
-    ? `\n- **${title.trim()}** (${hours}:${minutes})  \n\t- ${text?.replaceAll(
-        /\n(.+)/g,
-        "\n\t- $1"
-      )}`
-    : `\n- ${hours}:${minutes} \n\t- ${text?.replaceAll(
-        /\n(.+)/g,
-        "\n\t- $1"
-      )}`;
+  const formatText = (text) => {
+    return text?.replaceAll(/\n(.+)/g, "\n\t- $1");
+  };
+
+  const formatAttachments = (attachments) => {
+    if (!attachments) return "";
+    let formatted = "";
+    for (let attachment of attachments) {
+      formatted += `\n![attc.](../assets/${attachment.filePath})`;
+    }
+    return formatted;
+  };
+
+  const formattedTitle = formatTitle(file.title);
+  const formattedText = formatText(file.textContent);
+  const formattedAttachments = formatAttachments(file.attachments);
+  const timestamp = `${hours}:${minutes}`;
+  //2014_10_29.md
+  // const attachments = file.attachments;
+  const content = `\n- ${formattedTitle} (${timestamp}) \n\t- ${formattedText} \n\t- ${formattedAttachments}`;
 
   return { mdFileName, content };
 };
