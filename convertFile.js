@@ -16,7 +16,6 @@ const convertFile = (file) => {
 
   const mdFileName = `${year}_${month}_${day}.md`;
 
-  // TODO: Create assets directory and move actual attachments
   const formatTitle = (title) => {
     return title ? `**${title.trim()}**` : "";
   };
@@ -38,8 +37,7 @@ const convertFile = (file) => {
   const formattedText = formatText(file.textContent);
   const formattedAttachments = formatAttachments(file.attachments);
   const timestamp = `${hours}:${minutes}`;
-  //2014_10_29.md
-  // const attachments = file.attachments;
+
   const content = `\n- ${formattedTitle} (${timestamp}) \n\t- ${formattedText} \n\t- ${formattedAttachments}`;
 
   return { mdFileName, content };

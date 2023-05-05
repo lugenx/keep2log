@@ -2,13 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const copyAssets = (sourceDir, destinationDir) => {
-  // const sourceDir = "/Users/elgun/Desktop/folder1";
-  // const destinationDir = "/Users/elgun/Desktop/folder2";
-
   const allFiles = fs.readdirSync(sourceDir);
-
-  // fs.opendirSync(sourceDir);
-  // fs.opendirSync(destinationDir);
 
   let sourcePath, destinationPath, writeStream, ext;
   let totalTransfers = 0;
@@ -48,7 +42,5 @@ const copyAssets = (sourceDir, destinationDir) => {
     });
   }
 };
-
-// copyAssets();
 
 module.exports = copyAssets;

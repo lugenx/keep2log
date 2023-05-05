@@ -90,5 +90,3 @@ const runSecondQuestion = () => {
 };
 
 runFirstQuestion();
-
-// **18:45** [[quick capture]]: ![PXL_20230204_234526949](../assets/PXL_20230204_234526949.jpg){:height 86, :width 228}
