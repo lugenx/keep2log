@@ -18,7 +18,8 @@ let destinationDirectory;
 let jsonFiles;
 
 const runFirstQuestion = () => {
-  rl.question(FIRST_QUESTION, (askedFolderLocation) => {
+  rl.question(FIRST_QUESTION, (firstAnswer) => {
+    const askedFolderLocation = firstAnswer.trim().replace(/^['"]|['"]$/g, "");
     sourceDirectory = path.normalize(`${askedFolderLocation}/Takeout/Keep/`);
 
     if (
@@ -45,7 +46,10 @@ const runFirstQuestion = () => {
 };
 
 const runSecondQuestion = () => {
-  rl.question(SECOND_QUESTION, (askedDestinationLocation) => {
+  rl.question(SECOND_QUESTION, (secondAnswer) => {
+    const askedDestinationLocation = secondAnswer
+      .trim()
+      .replace(/^['"]|['"]$/g, "");
     destinationDirectory = path.normalize(askedDestinationLocation);
 
     if (
