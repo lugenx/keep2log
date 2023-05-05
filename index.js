@@ -4,6 +4,7 @@ const readline = require("node:readline");
 const { stdin: input, stdout: output } = require("node:process");
 const convertFile = require("./convertFile.js");
 const createOrReturnDirectory = require("./createOrReturnDirectory.js");
+const copyAssets = require("./copyAssets.js");
 
 const rl = readline.createInterface({ input, output });
 
@@ -17,7 +18,8 @@ let destinationDirectory;
 let jsonFiles;
 
 const runFirstQuestion = () => {
-  rl.question(FIRST_QUESTION, (askedFolderLocation) => {
+  rl.question(FIRST_QUESTION, (firstAnswer) => {
+    const askedFolderLocation = firstAnswer.trim().replace(/^['"]|['"]$/g, "");
     sourceDirectory = path.normalize(`${askedFolderLocation}/Takeout/Keep/`);
 
     if (
@@ -44,7 +46,10 @@ const runFirstQuestion = () => {
 };
 
 const runSecondQuestion = () => {
-  rl.question(SECOND_QUESTION, (askedDestinationLocation) => {
+  rl.question(SECOND_QUESTION, (secondAnswer) => {
+    const askedDestinationLocation = secondAnswer
+      .trim()
+      .replace(/^['"]|['"]$/g, "");
     destinationDirectory = path.normalize(askedDestinationLocation);
 
     if (
@@ -79,8 +84,11 @@ const runSecondQuestion = () => {
         destinationDirectory === "." ? __dirname : destinationDirectory
       }' directory. \x1b[0m\n`
     );
+    copyAssets(sourceDirectory, destinationDirectory);
     rl.close();
   });
 };
 
 runFirstQuestion();
+
+// **18:45** [[quick capture]]: ![PXL_20230204_234526949](../assets/PXL_20230204_234526949.jpg){:height 86, :width 228}
