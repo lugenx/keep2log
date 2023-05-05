@@ -4,6 +4,7 @@ const readline = require("node:readline");
 const { stdin: input, stdout: output } = require("node:process");
 const convertFile = require("./convertFile.js");
 const createOrReturnDirectory = require("./createOrReturnDirectory.js");
+const copyAssets = require("./copyAssets.js");
 
 const rl = readline.createInterface({ input, output });
 
@@ -79,6 +80,7 @@ const runSecondQuestion = () => {
         destinationDirectory === "." ? __dirname : destinationDirectory
       }' directory. \x1b[0m\n`
     );
+    copyAssets(sourceDirectory, destinationDirectory);
     rl.close();
   });
 };
