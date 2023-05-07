@@ -4,6 +4,16 @@
   "bin": {
     "keep2log": "index.js"
   },
+  "pkg": {
+    "targets": [
+      "node18-macos-x64",
+      "node18-macos-arm64",
+      "node18-linux-x64",
+      "node18-linux-arm64",
+      "node18-win-x64",
+      "node18-win-arm64"
+    ]
+  },
   "description": "Single executable CLI tool to conver Google Keep notes to Logseq journal entries",
   "main": "index.js",
   "scripts": {
