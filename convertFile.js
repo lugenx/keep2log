@@ -24,6 +24,13 @@ const convertFile = (file) => {
     return text?.replaceAll(/\n(.+)/g, "\n\t- $1");
   };
 
+  const formatList = (list) => {
+    const mappedList = list?.map((item) =>
+      item.isChecked ? `DONE ${item.text}` : `TODO ${item.text}`
+    );
+    return mappedList?.join("\n\t- ");
+  };
+
   const formatAttachments = (attachments) => {
     if (!attachments) return "";
     let formatted = "";
@@ -35,10 +42,13 @@ const convertFile = (file) => {
 
   const formattedTitle = formatTitle(file.title);
   const formattedText = formatText(file.textContent);
+  const formattedList = formatList(file.listContent);
   const formattedAttachments = formatAttachments(file.attachments);
   const timestamp = `${hours}:${minutes}`;
 
-  const content = `\n- ${formattedTitle} (${timestamp}) \n\t- ${formattedText} \n\t- ${formattedAttachments}`;
+  const content = `\n- ${formattedTitle} (${timestamp}) \n\t- ${
+    formattedText || formattedList || ""
+  } \n\t- ${formattedAttachments}`;
 
   return { mdFileName, content };
 };
