@@ -40,15 +40,21 @@ const convertFile = (file) => {
     return formatted;
   };
 
+  const formatLabels = (labels) => {
+    const mappedLabel = labels?.map((label) => `#[[${label.name}]]`);
+    return mappedLabel?.join(" ");
+  };
+
   const formattedTitle = formatTitle(file.title);
   const formattedText = formatText(file.textContent);
   const formattedList = formatList(file.listContent);
   const formattedAttachments = formatAttachments(file.attachments);
+  const formattedLabels = formatLabels(file.labels);
   const timestamp = `${hours}:${minutes}`;
 
-  const content = `\n- ${formattedTitle} (${timestamp}) \n\t- ${
-    formattedText || formattedList || ""
-  } \n\t- ${formattedAttachments}`;
+  const content = `\n- ${formattedTitle} (${timestamp}) ${
+    formattedLabels || ""
+  }\n\t- ${formattedText || formattedList || ""} \n\t- ${formattedAttachments}`;
 
   return { mdFileName, content };
 };
