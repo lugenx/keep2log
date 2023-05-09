@@ -80,7 +80,7 @@ const runSecondQuestion = () => {
       }
     }
     console.log(
-      `\n\x1b[92m All files processed. Total converted files: ${processedFilesCount}. \n Please look for newly created 'journals' folder in '${
+      `\n\x1b[92m All notes processed. Total converted notes: ${processedFilesCount}. \n Please look for newly created 'journals' folder in '${
         destinationDirectory === "." ? __dirname : destinationDirectory
       }' directory. \x1b[0m\n`
     );

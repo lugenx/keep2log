@@ -32,11 +32,11 @@ const copyAssets = (sourceDir, destinationDir) => {
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
       process.stdout.write(
-        `\x1b[1m\x1b[31m${completedTransfers}/${totalTransfers}\x1b[0m`
+        `\x1b[1m\x1b[31m${completedTransfers}/${totalTransfers} attachments transfered.\x1b[0m`
       );
       if (completedTransfers === totalTransfers) {
         console.log(
-          "\n\x1b[92mAll attachments are moved from Takeout folder to Logseq Assets folder\x1b[0m\n"
+          "\n\x1b[92mTransfer completed. Attachments copied to Assets folder\x1b[0m\n"
         );
       }
     });
