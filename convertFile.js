@@ -37,7 +37,7 @@ const convertFile = (file) => {
         formattedAnnotationsStr += formattedAnnotation;
       }
     }
-    return formattedText + " " + formattedAnnotationsStr;
+    return `${formattedText} ${formattedAnnotationsStr}`;
   };
 
   const formatList = (list) => {
