@@ -20,8 +20,24 @@ const convertFile = (file) => {
     return title ? `**${title.trim()}**` : "";
   };
 
-  const formatText = (text) => {
-    return text?.replaceAll(/\n(.+)/g, "\n\t- $1");
+  const formatTextAnnoContent = (text, annotations) => {
+    let formattedText = text?.replaceAll(/\n(.+)/g, "\n\t- $1");
+    if (!annotations) return formattedText;
+    let formattedAnnotationsStr = "";
+
+    for (let annotation of annotations) {
+      let formattedAnnotation = `\n[${annotation.title}](${annotation.url})`;
+
+      if (text && text.includes(annotation.url)) {
+        formattedText = formattedText.replace(
+          annotation.url,
+          formattedAnnotation
+        );
+      } else {
+        formattedAnnotationsStr += formattedAnnotation;
+      }
+    }
+    return `${formattedText} ${formattedAnnotationsStr}`;
   };
 
   const formatList = (list) => {
@@ -46,7 +62,10 @@ const convertFile = (file) => {
   };
 
   const formattedTitle = formatTitle(file.title);
-  const formattedText = formatText(file.textContent);
+  const formattedTextAnnoContent = formatTextAnnoContent(
+    file.textContent,
+    file.annotations
+  );
   const formattedList = formatList(file.listContent);
   const formattedAttachments = formatAttachments(file.attachments);
   const formattedLabels = formatLabels(file.labels);
@@ -54,7 +73,9 @@ const convertFile = (file) => {
 
   const content = `\n- ${formattedTitle} (${timestamp}) ${
     formattedLabels || ""
-  }\n\t- ${formattedText || formattedList || ""} \n\t- ${formattedAttachments}`;
+  }\n\t- ${
+    formattedTextAnnoContent || formattedList || ""
+  } \n\t- ${formattedAttachments}`;
 
   return { mdFileName, content };
 };
