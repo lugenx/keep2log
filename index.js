@@ -67,6 +67,7 @@ const runSecondQuestion = () => {
       try {
         const fileContent = fs.readFileSync(`${sourceDirectory}/${file}`);
         const jsonData = JSON.parse(fileContent);
+        if (jsonData.isTrashed) continue;
         const { mdFileName, content } = convertFile(jsonData);
 
         const pathToAppend = createOrReturnDirectory(
