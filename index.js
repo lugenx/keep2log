@@ -12,7 +12,7 @@ const copyAssets = require("./copyAssets.js");
 //const rl = readline.createInterface({ input, output });
 
 const FIRST_QUESTION =
-  " \n\x1b[1m\x1b[33mEnter the location of downloaded and unzipped 'Google Keep' Takeout folder?\x1b[0m \n\x1b[33m e.g. /Users/<your username>/desktop/\x1b[0m\n\n >. CAUTION: If using Google Keep in other languages, make sure to rename the directory inside Takeout to \'Keep\'!";
+  " \n\x1b[1m\x1b[33mEnter the location of downloaded and unzipped 'Google Keep' Takeout folder?\x1b[0m \n\x1b[33m e.g. /Users/<your username>/desktop/\x1b[0m CAUTION: If using Google Keep in other languages, make sure to rename the directory inside Takeout to \'Keep\'!\n\n >.";
 const SECOND_QUESTION =
   " \n\x1b[1m\x1b[33mEnter location of your 'Notes' folder (CAUTION: The directory should exist!) or press 'ENTER' if you want to create new 'notes' folder in current location\x1b[0m \n\x1b[33m e.g. /Users/<your username>/Documents/<Logseq Graph name>/\x1b[0m\n\n >";
 
