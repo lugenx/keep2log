@@ -1,5 +1,3 @@
-FORKED FROM ** https://github.com/lugenx/keep2log **
-
 # Keep2Log - Google Keep to Logseq Converter
 
 Keep2Log is a CLI tool that converts Google Keep Takeout files to Logseq journal entries, allowing you to migrate your notes from Google Keep to the Logseq note-taking app.
