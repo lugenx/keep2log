@@ -14,14 +14,14 @@ const convertFile = (file) => {
   hours = hours.toString().padStart(2, "0");
   minutes = minutes.toString().padStart(2, "0");
 
-  const mdFileName = `${year}_${month}_${day}.md`;
-
   const formatTitle = (title) => {
     return title ? `**${title.trim()}**` : "";
   };
 
   const formatTextAnnoContent = (text, annotations) => {
-    let formattedText = text?.replaceAll(/\n(.+)/g, "\n\t- $1");
+    let formattedText = text?.replaceAll(/\n(.+)/g, "\n- $1")
+    .replaceAll(/^-\s*•/gm, '\t-')
+    .replaceAll(/^-\s+-/gm, '\t\t-');
     if (!annotations) return formattedText;
     let formattedAnnotationsStr = "";
 
@@ -44,7 +44,7 @@ const convertFile = (file) => {
     const mappedList = list?.map((item) =>
       item.isChecked ? `DONE ${item.text}` : `TODO ${item.text}`
     );
-    return mappedList?.join("\n\t- ");
+    return mappedList?.join("\n- ");
   };
 
   const formatAttachments = (attachments) => {
@@ -57,8 +57,8 @@ const convertFile = (file) => {
   };
 
   const formatLabels = (labels) => {
-    const mappedLabel = labels?.map((label) => `#[[${label.name}]]`);
-    return mappedLabel?.join(" ");
+    const mappedLabel = labels?.map((label) => `${label.name}, `);
+    return mappedLabel;
   };
 
   const formattedTitle = formatTitle(file.title);
@@ -71,11 +71,11 @@ const convertFile = (file) => {
   const formattedLabels = formatLabels(file.labels);
   const timestamp = `${hours}:${minutes}`;
 
-  const content = `\n- ${formattedTitle} (${timestamp}) ${
-    formattedLabels || ""
-  }\n\t- ${
+  const content = `timestamp:: ${day}.${month}.${year} ${timestamp}\ntags:: ${formattedLabels?.join("") ?? ""}from-keep-2023\n- ${
     formattedTextAnnoContent || formattedList || ""
   } \n\t- ${formattedAttachments}`;
+
+  const mdFileName = `${file.title.replaceAll('/', '___')}.md`;
 
   return { mdFileName, content };
 };
